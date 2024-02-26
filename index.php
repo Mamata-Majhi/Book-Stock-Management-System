@@ -14,21 +14,26 @@
     <div class="mb-4">
       <h1 class="block text-gray-700 text-2xl font-bold">Login</h1>
     </div>
-    <form action="/MyProject/nav" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <?php
+        if (isset($_GET['error']) && $_GET['error'] == 1) {
+            echo '<p style="color: red;">Invalid username or password. Please try again.</p>';
+        }
+        ?>
+    <form action="./MyProject/validate_user/login_page.php" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="return validateForm()">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
           Username
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" placeholder="Username" />
       </div>
       <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
           Password
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="*********" />
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" placeholder="*********" />
       </div>
       <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           Log In
         </button>
         <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="MyProject/register.php">
@@ -36,6 +41,23 @@
         </a>
       </div>
     </form>
+
+    <!-- validation code -->
+    <script>
+      function validateForm() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Check if username and password are not empty
+        if (username.trim() === "" || password.trim() === "") {
+          alert("Please fill out both username and password fields");
+          return false; // Prevent form submission
+        }
+
+        // If all fields are filled, allow form submission
+        return true;
+      }
+    </script>
   </div>
 </body>
 
