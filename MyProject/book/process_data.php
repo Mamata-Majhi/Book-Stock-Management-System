@@ -11,11 +11,15 @@ $isbn=$_POST['isbn'];
 
 // inserting data into the book table
 $sql="INSERT INTO book(title,author,genre,price,isbn,image)
-VALUES('$title','$author','$genre',$price','$image','$isbn')";
+VALUES('$title','$author','$genre','$price','$isbn','$image')";
 $conn=mysqli_query($conn,$sql);
 
 if(isset($conn)){
-    header('location:/Book-Stock-Management-System/MyProject/dashboard/indexx.php');
+    // echo"data inserted!!";
+    // $lastInsertedId = mysqli_insert_id($conn);
+    // echo "Data inserted with ID: " . $lastInsertedId;
+
+    header('location:/Book-Stock-Management-System/MyProject/book/index.php');
 }
 else{
     echo"Data not inserted !!";

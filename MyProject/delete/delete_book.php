@@ -6,7 +6,7 @@ if(isset($_GET['id']))
     $sql="DELETE FROM book WHERE id=".$id;
     $res=mysqli_query($conn,$sql);
     if($res){
-        header('location:/Book-Stock-Management-System/MyProject/dashboard/index.php');
+        header('location:/Book-Stock-Management-System/MyProject/book/index.php');
 
     }
     else{

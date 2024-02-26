@@ -15,18 +15,18 @@ include'./../connection.php';
 <body>
     <?php
     include("../navbar/navbar.php");
-    $sql="SELECT * FROM 'book'";
+    $sql="SELECT * FROM book";
     $result=mysqli_query($conn,$sql);
-    if(isset($result))
-    {
-        echo"hey !!";
-    }
+    // if(isset($result))
+    // {
+    //     echo"hey !!";
+    // }
     ?>
     <div class="container">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Book List</h5>
-                <a href="./add.php" class="btn btn-primary">Add Book</a>
+                <a href="./add_book.php" class="btn btn-primary">Add Book</a>
             </div>
             <div class="card-body">
                 <table class="table table-hover">
@@ -42,7 +42,7 @@ include'./../connection.php';
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <!-- <tbody>
                         <tr>
                             <th scope="row">1</th>
                             <td>Sample Title 1</td>
@@ -71,7 +71,7 @@ include'./../connection.php';
                                 <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete()">Delete</button>
                             </td>
                         </tr>
-                    </tbody>
+                    </tbody> -->
                     <?php
                     $counter=0;
                     if(mysqli_num_rows($result)>0){
@@ -86,9 +86,9 @@ include'./../connection.php';
                                 <td><?php echo $rows['image'];?></td>
                                 <td><?php echo $rows['isbn'];?></td>
 
-                                <td><button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./php/view.php?id=<?php echo $rows['id'];?>">View</a></button></td>
-                                <td><button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./php/edit.php?id=<?php echo $rows['id'];?>">Edit</a></button></td>
-                                <td><button type="submit" class="hover:text-red-500 transition duration-400 ease-in-out"><a href="./php/delete.php?id=<?php echo $rows['id'];?>">Delete</a></button></td>
+                                <td><button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./php/view.php?id=<?php echo $rows['id'];?>">View</a></button>
+                                <button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./../edit/edit_book.php?id=<?php echo $rows['id'];?>">Edit</a></button>
+                                <button type="submit" class="text-red-500 hover:text-red-900 transition duration-400 ease-in-out"><a href="./../delete/delete_book.php?id=<?php echo $rows['id'];?>">Delete</a></button></td>
                                 
 
 
