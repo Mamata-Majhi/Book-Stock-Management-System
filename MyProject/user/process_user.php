@@ -1,3 +1,5 @@
 <?php
-echo"hello";
+// echo"hello";
+include'./../connection.php';
+
 ?>

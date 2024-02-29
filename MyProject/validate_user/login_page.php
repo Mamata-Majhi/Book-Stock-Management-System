@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     } else {
         // echo "Invalid username or password";
 
-        header("Location: /Book-Stock-Management-System/index.php?error=1");
+        header("Location:/Book-Stock-Management-System/index.php?error=1");
         exit();
     }
    
