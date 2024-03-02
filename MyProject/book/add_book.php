@@ -1,12 +1,3 @@
-<?php
-include './../connection.php';
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM `book` WHERE id=" . $id;
-    $res = mysqli_query($conn, $sql);
-    $data = mysqli_fetch_assoc($res);
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">

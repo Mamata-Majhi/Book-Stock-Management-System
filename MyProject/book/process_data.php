@@ -1,37 +1,59 @@
 <?php
-include'./../connection.php';
-if($_SERVER["REQUEST_METHOD"]=="POST")
-$data='';
-$title=$_POST['title'];
-$author=$_POST['author'];
-$genre=$_POST['genre'];
-$price=$_POST['price'];
-// $image=$_FILES['image'];
-$isbn=$_POST['isbn'];
 
-// Handle image upload
-$imagePath = './../uploaded_image';  // Specify your image folder path
-$imageName = $_FILES['image']['name'];
-$imageTmpName = $_FILES['image']['tmp_name'];
-$imageDestination = $imagePath . $imageName;
 
-move_uploaded_file($imageTmpName, $imageDestination);
+include './../connection.php';
 
-// inserting data into the book table
-$sql="INSERT INTO book(title,author,genre,price,isbn,image,user_id)
-VALUES('$title','$author','$genre','$price','$isbn','$imageName',3)";
-$conn=mysqli_query($conn,$sql);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST['title'];
+    $author = $_POST['author'];
+    $genre = $_POST['genre'];
+    $price = $_POST['price'];
+    $isbn = $_POST['isbn'];
 
-if(isset($conn)){
-    // echo"data inserted!!";
-    // $lastInsertedId = mysqli_insert_id($conn);
-    // echo "Data inserted with ID: " . $lastInsertedId;
+    // Specify your image folder path
+    $imagePath = './../uploaded_image';
+    $imageName = $_FILES['image']['name'];
+    $imageTmpName = $_FILES['image']['tmp_name'];
+    $imageDestination = $imagePath . $imageName;
 
-    header('location:/Book-Stock-Management-System/MyProject/book/index.php');
+    // Move uploaded file to destination
+    move_uploaded_file($imageTmpName, $imageDestination);
+
+    // TODO: Validate and sanitize user input, e.g., using prepared statements
+
+
+     // Set $user_id based on your authentication logic
+     $user_id = 6;
+
+
+    // Use prepared statements to prevent SQL injection
+    $sql = "INSERT INTO book (title, author, genre, price, isbn, image, user_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    $stmt = mysqli_prepare($conn, $sql);
+
+    // Bind parameters
+    mysqli_stmt_bind_param($stmt, "ssssssi", $title, $author, $genre, $price, $isbn, $imageName, $user_id);
+
+   
+
+    // Execute the statement
+    $result = mysqli_stmt_execute($stmt);
+
+    if ($result) {
+        header('location:/Book-Stock-Management-System/MyProject/book/index.php');
+    } else {
+        echo "Data not inserted: " . mysqli_error($conn);
+    }
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
 }
-else{
-    echo"Data not inserted !!" . mysqli_error($conn);
-}
+
+// Close the connection
+mysqli_close($conn);
+?>
+
 
 
 ?>

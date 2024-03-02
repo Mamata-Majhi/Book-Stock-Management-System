@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!$_SESSION["full_name"]) {
+    header('location:./login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
