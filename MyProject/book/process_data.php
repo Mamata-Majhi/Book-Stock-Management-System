@@ -6,12 +6,20 @@ $title=$_POST['title'];
 $author=$_POST['author'];
 $genre=$_POST['genre'];
 $price=$_POST['price'];
-$image=$_POST['image'];
+// $image=$_FILES['image'];
 $isbn=$_POST['isbn'];
 
+// Handle image upload
+$imagePath = './../uploaded_image';  // Specify your image folder path
+$imageName = $_FILES['image']['name'];
+$imageTmpName = $_FILES['image']['tmp_name'];
+$imageDestination = $imagePath . $imageName;
+
+move_uploaded_file($imageTmpName, $imageDestination);
+
 // inserting data into the book table
-$sql="INSERT INTO book(title,author,genre,price,isbn,image)
-VALUES('$title','$author','$genre','$price','$isbn','$image')";
+$sql="INSERT INTO book(title,author,genre,price,isbn,image,user_id)
+VALUES('$title','$author','$genre','$price','$isbn','$imageName',3)";
 $conn=mysqli_query($conn,$sql);
 
 if(isset($conn)){
@@ -22,7 +30,8 @@ if(isset($conn)){
     header('location:/Book-Stock-Management-System/MyProject/book/index.php');
 }
 else{
-    echo"Data not inserted !!";
+    echo"Data not inserted !!" . mysqli_error($conn);
 }
+
 
 ?>

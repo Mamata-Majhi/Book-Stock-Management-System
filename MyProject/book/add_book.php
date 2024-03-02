@@ -1,12 +1,10 @@
 <?php
-include'./../connection.php';
-if(isset($_GET['id']))
-{
-    $id=$_GET['id'];
+include './../connection.php';
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
     $sql = "SELECT * FROM `book` WHERE id=" . $id;
     $res = mysqli_query($conn, $sql);
     $data = mysqli_fetch_assoc($res);
-
 }
 ?>
 
@@ -16,14 +14,31 @@ if(isset($_GET['id']))
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <title>Add Book</title>
+    <script>
+        function validateISBN() {
+            // Get the value of the ISBN input
+            var isbnInput = document.getElementById('isbn').value;
+
+            // Check if the ISBN is exactly 13 digits long
+            if (isbnInput.length === 13) {
+                return true; // ISBN is valid
+            } else {
+                alert('ISBN should be 13 digits long.');
+                return false; // ISBN is not valid
+            }
+        }
+    </script>
 </head>
 
 <body>
     <?php
-    include("../navbar/navbar.php");
+    // include("../navbar/navbar.php");
     ?>
     <div class="container w-50">
         <div class="card">
@@ -31,7 +46,9 @@ if(isset($_GET['id']))
                 <h5 class="mb-0">Add Book</h5>
             </div>
             <div class="card-body">
-                <form action="<?php echo isset($data) ? './../edit/edit_book.php':"./process_data.php"?>" method="POST">
+                <form action="./process_data.php" method="POST" enctype="multipart/form-data" onsubmit="return validateISBN()">
+                    <input type="hidden" name="id" value="<?php echo isset($data) ? $data['id'] : ''; ?>">
+
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Title</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required />

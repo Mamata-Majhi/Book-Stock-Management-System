@@ -15,22 +15,22 @@
       <h1 class="block text-gray-700 text-2xl font-bold">Sign Up</h1>
       <p>It's quick and easy.</p>
     </div>
-    <form action="./user/process_user.php" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="return validateForm()">
+    <form action="./process_user.php" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="return validateForm()">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="fullname">
           Full Name
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" placeholder="Full Name" />
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fullname" name="fullname" type="text" placeholder="Full Name" />
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Username</label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" placeholder="abc@gmail.com" type="email" />
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email" >Email</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" placeholder="abc@gmail.com" type="email" />
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Gender</label>
         <div class="block text-gray-700 font-semibold ">
-          <input type="radio" name="gender" id="male" checked>Male
-          <input type="radio" name="gender" id="female">Female
+          <input type="radio" name="gender" id="male" value="male" checked>Male
+          <input type="radio" name="gender" id="female" value="female">Female
         </div>
 
       </div>
@@ -38,19 +38,19 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
           Password
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" />
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" placeholder="Password" />
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="cpassword">
           Confirm Password
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="cpassword" type="password" placeholder="Confirm Password" />
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="cpassword" type="password" name="password" placeholder="Confirm Password" />
       </div>
       <div class="flex items-center justify-between">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           Sign Up
         </button>
-        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="../index.php">
+        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="./user_login.php">
           Login Here
         </a>
     </form>
@@ -58,7 +58,7 @@
 
   <!-- validation of form -->
   <!-- validation of form -->
-<script>
+  <script>
     function validateForm() {
         var fullname = document.getElementById("fullname").value;
         var email = document.getElementById("email").value;
@@ -71,12 +71,19 @@
             return false; // Prevent form submission
         }
 
+        // Check if passwords match
+        if (password !== cpassword) {
+            alert("Passwords do not match");
+            return false; // Prevent form submission
+        }
+
         // You can add additional validation logic here if needed
 
-        // If all fields are filled, allow form submission
+        // If all fields are filled and passwords match, allow form submission
         return true;
     }
 </script>
+
 
 </body>
 
