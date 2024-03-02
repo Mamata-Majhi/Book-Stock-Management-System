@@ -1,5 +1,6 @@
 <?php
 include './../connection.php';
+// echo"Connection successful!";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from POST request

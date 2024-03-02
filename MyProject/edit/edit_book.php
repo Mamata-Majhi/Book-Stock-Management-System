@@ -64,14 +64,14 @@
                         <label for="exampleInputEmail1" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" name="price" placeholder="Price" required value="<?php echo ($row[5]) ?> " />
                     </div>
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">ISBN</label>
                         <input type="number" class="form-control" id="isbn" name="isbn" placeholder="Enter ISBN" required value="<?php echo ($row[6]) ?> "/>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image" required value="<?php echo ($row[7]) ?> "/>
-                    </div> -->
+                    </div>
                     <a type="button" href="./../book/index.php" class="btn btn-secondary">Back</a>
                     <button type="submit" class="btn btn-success">Update</button>
                 </form>
