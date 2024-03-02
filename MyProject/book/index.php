@@ -88,7 +88,7 @@ include'./../connection.php';
                                 <td><?php echo $rows['image'];?></td>
                                 <td><?php echo $rows['isbn'];?></td>
 
-                                <td><button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./php/view.php?id=<?php echo $rows['id'];?>">View</a></button>
+                                <td><button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./../view/view_book.php?id=<?php echo $rows['id'];?>">View</a></button>
                                 <button type="submit" class="hover:text-blue-500 transition duration-400 ease-in-out"><a href="./../edit/edit_book.php?id=<?php echo $rows['id'];?>">Edit</a></button>
                                 <button type="submit" class="text-red-500 hover:text-red-900 transition duration-400 ease-in-out"><a href="./../delete/delete_book.php?id=<?php echo $rows['id'];?>">Delete</a></button></td>
                                 
