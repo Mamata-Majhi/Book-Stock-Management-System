@@ -22,9 +22,9 @@ $row = mysqli_fetch_array($result);
     <section class="text-center">
         <div>
             <div class="mb-10">
-            <h2 class="font-bold text-6xl"><?php echo $row['title']; ?></h2>
-            <p class="font-semi-bold text-2xl">Author: <?php echo $row['author']; ?></p>
-            <p class="font-semi-bold text-2xl">Genre: <?php echo $row['genre']; ?></p>
+                <h2 class="font-bold text-6xl"><?php echo $row['title']; ?></h2>
+                <p class="font-semi-bold text-2xl">Author: <?php echo $row['author']; ?></p>
+                <p class="font-semi-bold text-2xl">Genre: <?php echo $row['genre']; ?></p>
             </div>
 
             <?php
@@ -38,7 +38,7 @@ $row = mysqli_fetch_array($result);
         </div>
         <div class="pt-6">
             <a href="./../book/index.php"><button class="bg-blue-500 px-6 py-2 border-solid text-xl font-bold rounded-lg text-white">Back</button>
-</a>
+            </a>
         </div>
     </section>
 </body>

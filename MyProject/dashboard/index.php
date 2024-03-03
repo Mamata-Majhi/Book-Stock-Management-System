@@ -1,155 +1,93 @@
 <?php
 session_start();
-if (!$_SESSION["full_name"]) {
-    header('location:./login.php');
+if (!$_SESSION["user_name"]) {
+    header('location:../login.php');
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dashboard</title>
+    <!-- Add your CSS links here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .book-card {
+            margin-bottom: 20px;
+        }
 
-    <title>Add Book</title>
+        .carousel-item img {
+            max-height: 150px;
+            /* Adjust this value as needed */
+            margin: auto;
+        }
+
+        .recommend {
+            height: 250px;
+            /* Adjust the height as needed */
+            object-fit: cover;
+            /* Ensure the image covers the entire container */
+        }
+    </style>
 </head>
 
 <body>
-    <?php
-    include("../navbar/navbar.php");
-    ?>
-    <h2 class="text-info text-center text-4xl font-semi-bold text-blue-600">Welcome To Book Recommendation System</h2>
-    <section class="md:grid grid-cols-3 gap-4 md:px-20">
-      <section class="px-4 md:px-0 pt-8 md:pt-12">
-        <div class="pt-8 pb-12 relative bg-slate-50">
-          <div class="absolute px-2 py-4 bg-orange-300">
-            <h1 class="text-sm font-bold tvertical text-white">SALE</h1>
-          </div>
-          <img
-            src="./../uploaded_image/war_bodies.jpg"
-            alt="jazz"
-            class="object-contain h-48 w-96 m-auto"
-          />
-          <div class="pt-4 flex items-center justify-center">
-            <button class=" text-xl font-bold">add to cart</button>
-          </div>
-          <div>
-            <h2 class="text-orange-300 text-center font-bold text-xl pt-2">
-              $1050
-            </h2>
-          </div>
-        </div>
-      </section>
+    <?php include("../navbar/navbar.php"); ?>
 
-      <section class="px-4 md:px-0 pt-8 md:pt-12">
-        <div class="pt-8 pb-12 relative bg-slate-50">
-          <div class="absolute px-2 py-4 bg-orange-300">
-            <h1 class="text-sm font-bold tvertical text-white">SALE</h1>
-          </div>
-          <img
-            src="./../uploaded_image/winter_garden.jpg"
-            alt="inner"
-            class="object-contain h-48 w-96 m-auto"
-          />
-          <div class="pt-4 flex items-center justify-center">
-            <button class="text-center text-xl font-bold">add to cart</button>
-          </div>
-          <div>
-            <h2 class="text-orange-300 text-center font-bold text-xl pt-2">
-              $250
-            </h2>
-          </div>
+    <div class="container">
+        <div class="row">
+            <?php
+            // Include the booklist.php page
+            include("../book/booklist.php");
+            shuffle($books);
+            // Loop through each book and display it in a card
+            foreach ($books as $book) {
+                $book_id = urlencode($book['id']);
+                echo '<div class="col-md-3">
+                        <div class="card shadow book-card">
+                            <img src="' . $book['image'] . '" class="card-img-top" alt="Book Image">
+                            <div class="card-body">
+                                <h5 class="card-title">' . $book['title'] . '</h5>
+                                <p class="card-text">Author: ' . $book['author'] . '</p>
+                                <a href="../book/checkin.php?id=' . $book_id . '" class="btn btn-primary">Check In</a>
+                            </div>
+                        </div>
+                    </div>';
+            }
+            ?>
         </div>
-      </section>
+    </div>
 
-      <section class="px-4 md:px-0 pt-8 md:pt-12">
-        <div class="pt-8 pb-12 relative bg-slate-50">
-          <div class="absolute px-2 py-4 bg-orange-300">
-            <h1 class="text-sm font-bold tvertical text-white">SALE</h1>
-          </div>
-          <img
-            src="./../uploaded_image/the_women.jpg"
-            alt="rose"
-            class="object-contain h-48 w-96 m-auto"
-          />
-          <div class="pt-4 flex items-center justify-center">
-            <button class="text-center text-xl font-bold">add to cart</button>
-          </div>
-          <div>
-            <h2 class="text-orange-300 text-center font-bold text-xl pt-2">
-              $890
-            </h2>
-          </div>
-        </div>
-      </section>
-    </section>
+    <hr>
 
-    <section class="md:grid grid-cols-3 gap-4 md:px-20">
-      <section class="px-4 md:px-0 pt-8 md:pt-20">
-        <div class="pt-8 pb-12 relative bg-slate-50">
-          <div class="absolute px-2 py-4 bg-orange-300">
-            <h1 class="text-sm font-bold tvertical text-white">SALE</h1>
-          </div>
-          <img
-            src="./../uploaded_image/black_cresent.jpg"
-            alt="jazz"
-            class="object-contain h-48 w-96 m-auto"
-          />
-          <div class="pt-4 flex items-center justify-center">
-            <button class="text-center text-xl font-bold">add to cart</button>
-          </div>
-          <div>
-            <h2 class="text-orange-300 text-center font-bold text-xl pt-2">
-              $1050
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      <section class="px-4 md:px-0 pt-8 md:pt-20">
-        <div class="pt-8 pb-12 relative bg-slate-50">
-          <div class="absolute px-2 py-4 bg-orange-300">
-            <h1 class="text-sm font-bold tvertical text-white">SALE</h1>
-          </div>
-          <img
-            src="./../uploaded_image/another_life.jpg"
-            alt="inner"
-            class="object-contain h-48 w-96 m-auto"
-          />
-          <div class="pt-4 flex items-center justify-center">
-            <button class="text-center text-xl font-bold">add to cart</button>
-          </div>
-          <div>
-            <h2 class="text-orange-300 text-center font-bold text-xl pt-2">
-              $250
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      <section class="px-4 md:px-0 pt-8 md:pt-20">
-        <div class="pt-8 pb-12 relative bg-slate-50">
-          <div class="absolute px-2 py-4 bg-orange-300">
-            <h1 class="text-sm font-bold tvertical text-white">SALE</h1>
-          </div>
-          <img
-            src="./../uploaded_image/justice.jpg"
-            alt="rose"
-            class="object-contain h-48 w-96 m-auto"
-          />
-          <div class="pt-4 flex items-center justify-center">
-            <button class="text-center text-xl font-bold">add to cart</button>
-          </div>
-          <div>
-            <h2 class="text-orange-300 text-center font-bold text-xl pt-2">
-              $890
-            </h2>
-          </div>
-        </div>
-      </section>
-    </section>
+    <div class="container py-4">
+        <fieldset>
+            <legend class="text-success text-center">Your Recommend</legend>
+            <div class="row">
+                <?php
+                shuffle($books);
+                for ($i = 0; $i < min(4, count($books)); $i++) {
+                    $book = $books[$i];
+                    echo '<div class="col-md-3">
+                    <div class="card">
+                        <img src="' . $book['image'] . '" class="card-img-top recommend" alt="Book Image">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $book['title'] . '</h5>
+                            <p class="card-text">Author: ' . $book['author'] . '</p>
+                        </div>
+                    </div>
+                </div>';
+                }
+                ?>
+            </div>
+        </fieldset>
+    </div>
+    <!-- Add your JS links here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-F2qxHhhIPwjBnhirMCp6h66ZrWiI0xZm4N+KZVNbyf3g20JLozgNwxCfLHEcOOEq" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 
 </html>

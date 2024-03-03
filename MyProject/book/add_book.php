@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,33 +10,50 @@
 
 
     <title>Add Book</title>
-    <script>
-        function validateISBN() {
-            // Get the value of the ISBN input
-            var isbnInput = document.getElementById('isbn').value;
 
-            // Check if the ISBN is exactly 13 digits long
-            if (isbnInput.length === 13) {
-                return true; // ISBN is valid
-            } else {
-                alert('ISBN should be 13 digits long.');
-                return false; // ISBN is not valid
+    <script>
+        function validatePrice() {
+            var priceInput = document.getElementById('price');
+            var priceValue = priceInput.value.trim();
+            var priceRegex = /^[0-9]+$/;
+
+            if (!priceRegex.test(priceValue)) {
+                alert('Please enter only numbers for Price.');
+                priceInput.value = ''; // Clear the input
+                return false;
             }
+            return true;
+        }
+
+        function validateISBN() {
+            var isbnInput = document.getElementById('isbn');
+            var isbnValue = isbnInput.value.trim();
+
+            if (isbnValue.length !== 13 || !/^\d+$/.test(isbnValue)) {
+                alert('ISBN should be 13 digits long and contain only numbers.');
+                isbnInput.value = ''; // Clear the input
+                return false;
+            }
+            return true;
+        }
+
+        function validateForm() {
+            return validatePrice() && validateISBN();
         }
     </script>
 </head>
 
 <body>
     <?php
-    // include("../navbar/navbar.php");
+    include("../navbar/navbar.php");
     ?>
-    <div class="container w-50">
+    <div class="container mt-5 w-50">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Add Book</h5>
             </div>
             <div class="card-body">
-                <form action="./process_data.php" method="POST" enctype="multipart/form-data" onsubmit="return validateISBN()">
+                <form action="./process_data.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                     <input type="hidden" name="id" value="<?php echo isset($data) ? $data['id'] : ''; ?>">
 
                     <div class="mb-3">
@@ -54,18 +70,18 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" placeholder="Price" required />
+                        <input type="text" class="form-control" id="price" name="price" placeholder="Price" required  />
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">ISBN</label>
-                        <input type="number" class="form-control" id="isbn" name="isbn" placeholder="Enter ISBN" required />
+                        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Enter ISBN" required />
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Image</label>
                         <input type="file" class="form-control" id="image" name="image" required />
                     </div>
-                    <a type="button" href="./index.php" class="btn btn-secondary">Back</a>
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <a type="button" href="./index.php" class="btn btn-secondary bg-secondary">Back</a>
+                    <button type="submit" class="btn btn-success bg-success">Save</button>
                 </form>
             </div>
         </div>
